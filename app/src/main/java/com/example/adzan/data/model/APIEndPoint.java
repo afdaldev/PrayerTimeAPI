@@ -11,4 +11,10 @@ public interface APIEndPoint {
             @Query("city") String city,
             @Query("country") String country
     );
+
+    @GET("hijriCalendarByCity")
+    Call<AdzanResponse> getPrayerTimeHijriCalendarByCity(
+            @Query("city") String city,
+            @Query("country") String country
+    );
 }

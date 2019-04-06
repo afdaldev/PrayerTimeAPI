@@ -42,5 +42,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        AdzanService.getAPI().getPrayerTimeHijriCalendarByCity("Makassar", "ID").enqueue(new Callback<AdzanResponse>() {
+            @Override
+            public void onResponse(Call<AdzanResponse> call, Response<AdzanResponse> response) {
+                List<AdzanResponse.DataBean> dataBeans = response.body().getData();
+
+                for (AdzanResponse.DataBean dataBean: dataBeans){
+                    AdzanResponse.DataBean.DateBean.HijriBean hijriBean = dataBean.getDate().getHijri();
+                    AdzanResponse.DataBean.TimingsBean timingsBean = dataBean.getTimings();
+
+                    Log.d("Jadwal Shalat Zuhur", timingsBean.getDhuhr() + " in " + hijriBean.getDate());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AdzanResponse> call, Throwable t) {
+
+            }
+        });
+
     }
 }
